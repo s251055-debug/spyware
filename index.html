@@ -202,6 +202,8 @@ function selectLevel(level){
 document.querySelectorAll('[data-level-tab]').forEach(button=>button.addEventListener('click',()=>selectLevel(button.dataset.levelTab)));
 document.getElementById('levelTabs').addEventListener('keydown',event=>{if(!['ArrowLeft','ArrowRight','Home','End'].includes(event.key))return;event.preventDefault();const tabs=[...document.querySelectorAll('[data-level-tab]')];const current=tabs.findIndex(tab=>tab.getAttribute('aria-selected')==='true');let next=event.key==='Home'?0:event.key==='End'?tabs.length-1:(current+(event.key==='ArrowRight'?1:-1)+tabs.length)%tabs.length;tabs[next].focus();selectLevel(tabs[next].dataset.levelTab)});
 selectLevel('beginners');
+let cameraStream=null,micStream=null,audioContext=null,analyser=null,micFrame=null,scanTimer=null,chart=null;
+const $=id=>document.getElementById(id);
 $('feedbackForm').addEventListener('submit',event=>{
  event.preventDefault();
  const nickname=$('feedbackName').value.trim();
@@ -213,8 +215,6 @@ $('feedbackForm').addEventListener('submit',event=>{
  $('feedbackStatus').textContent='Ανοίγει η εφαρμογή email. Για να σταλεί το μήνυμα, πάτησε «Αποστολή» μέσα στην εφαρμογή.';
  window.location.href=mailto;
 });
-let cameraStream=null,micStream=null,audioContext=null,analyser=null,micFrame=null,scanTimer=null,chart=null;
-const $=id=>document.getElementById(id);
 function stopStream(stream){if(stream)stream.getTracks().forEach(track=>track.stop())}
 $('cameraOn').addEventListener('click',async()=>{
  try{if(!navigator.mediaDevices?.getUserMedia)throw new Error('Η πρόσβαση απαιτεί HTTPS και συμβατό browser.');
