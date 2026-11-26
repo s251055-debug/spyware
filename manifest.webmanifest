@@ -1,0 +1,21 @@
+{
+  "id": "/",
+  "name": "CyberShield — Cybersecurity Learning Lab",
+  "short_name": "CyberShield",
+  "description": "An educational cybersecurity lab for learning about malware, privacy and online safety.",
+  "lang": "el",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "orientation": "any",
+  "background_color": "#08111f",
+  "theme_color": "#08111f",
+  "icons": [
+    {
+      "src": "/icons/icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}
