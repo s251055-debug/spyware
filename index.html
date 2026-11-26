@@ -39,6 +39,7 @@ footer{padding:10px 0 30px;color:var(--muted);font-size:.88rem}
 <button type="button" role="tab" id="tab-beginners" aria-controls="level-beginners" aria-selected="true" data-level-tab="beginners">Beginners</button>
 <button type="button" role="tab" id="tab-igcse" aria-controls="level-igcse" aria-selected="false" data-level-tab="igcse">IGCSE</button>
 <button type="button" role="tab" id="tab-alevel" aria-controls="level-alevel" aria-selected="false" data-level-tab="alevel">A-Level</button>
+<button type="button" role="tab" id="tab-contact" aria-controls="level-contact" aria-selected="false" data-level-tab="contact">Επικοινωνία &amp; Σχόλια</button>
 </nav>
 <p class="level-intro" id="levelDescription" aria-live="polite">Ξεκίνα με τις βασικές έννοιες και τις διαδραστικές δοκιμές.</p>
 <section class="panel level-panel" id="level-igcse" role="tabpanel" aria-labelledby="tab-igcse" hidden>
@@ -65,6 +66,26 @@ footer{padding:10px 0 30px;color:var(--muted);font-size:.88rem}
 </section>
 <section class="panel level-panel" id="level-alevel" role="tabpanel" aria-labelledby="tab-alevel" hidden>
 <div class="tag">A-Level · Advanced study</div><h2>Προχωρημένη μελέτη</h2><p>Ανάλυση μηχανισμών, τεχνικών επιπτώσεων, αξιολόγηση αμυντικών μέτρων και ξεχωριστές διαδρομές για 9618 και 9626.</p>
+</section>
+<section class="panel level-panel" id="level-contact" role="tabpanel" aria-labelledby="tab-contact" hidden>
+<div class="tag">CyberShield · Επικοινωνία</div>
+<h2>Επικοινωνία &amp; Σχόλια</h2>
+<p>Έχεις απορία, ιδέα ή πρόταση για να γίνει καλύτερο το CyberShield; Στείλε μας ένα μήνυμα.</p>
+<div class="stat">
+<strong>Επικοινωνία μέσω email</strong>
+<p><a href="mailto:t.a.f.m.w.2026@gmail.com" style="color:var(--cyan)">t.a.f.m.w.2026@gmail.com</a></p>
+<p><a href="mailto:t.a.f.m.w.2026@gmail.com?subject=Μήνυμα%20για%20το%20CyberShield" style="color:var(--cyan)">Άνοιγμα νέου email</a></p>
+</div>
+<h3>Φόρμα σχολίων και προτάσεων</h3>
+<form id="feedbackForm">
+<label for="feedbackName">Όνομα ή ψευδώνυμο (προαιρετικό)</label>
+<input id="feedbackName" name="nickname" type="text" maxlength="60" autocomplete="nickname" placeholder="π.χ. Alex" style="display:block;width:100%;margin:8px 0 14px;padding:12px;border:1px solid var(--line);border-radius:10px;background:#0b1727;color:var(--text)">
+<label for="feedbackMessage">Το μήνυμά σου</label>
+<textarea id="feedbackMessage" name="message" required maxlength="2000" rows="5" placeholder="Γράψε εδώ το σχόλιο, την ερώτηση ή την πρότασή σου..." style="display:block;width:100%;margin:8px 0 14px;padding:12px;border:1px solid var(--line);border-radius:10px;background:#0b1727;color:var(--text);font:inherit"></textarea>
+<button type="submit">Άνοιγμα email για αποστολή</button>
+</form>
+<p class="result" id="feedbackStatus" aria-live="polite">Το μήνυμα θα ανοίξει στην εφαρμογή email σου. Έλεγξέ το και πάτησε «Αποστολή» εκεί.</p>
+<p class="notice">Για την προστασία σου, μην γράφεις κωδικούς, διευθύνσεις, τηλέφωνα ή άλλα προσωπικά/ευαίσθητα στοιχεία. Το CyberShield δεν αποθηκεύει τα σχόλια στη σελίδα. Το email αποστέλλεται μόνο αν το επιβεβαιώσεις εσύ από την εφαρμογή email.</p>
 </section>
 <section class="panel level-content" data-levels="beginners"><div class="tag">01 · Camera</div><h2>Δοκιμή κάμερας</h2>
 <p>Η προεπισκόπηση εμφανίζεται μόνο σε εσένα. Πάτησε διακοπή όταν τελειώσεις.</p>
@@ -171,7 +192,7 @@ footer{padding:10px 0 30px;color:var(--muted);font-size:.88rem}
 </main>
 <script>
 
-const levelDescriptions={beginners:'Ξεκίνα με τις βασικές έννοιες και τις διαδραστικές δοκιμές.',igcse:'Μελέτησε τις απειλές κυβερνοασφάλειας, το malware και τα μέτρα προστασίας για IGCSE.',alevel:'Προχώρησε σε τεχνική ανάλυση, αξιολόγηση μέτρων και ύλη Cambridge A-Level 9618 / 9626.'};
+const levelDescriptions={beginners:'Ξεκίνα με τις βασικές έννοιες και τις διαδραστικές δοκιμές.',igcse:'Μελέτησε τις απειλές κυβερνοασφάλειας, το malware και τα μέτρα προστασίας για IGCSE.',alevel:'Προχώρησε σε τεχνική ανάλυση, αξιολόγηση μέτρων και ύλη Cambridge A-Level 9618 / 9626.',contact:'Στείλε σχόλια, προτάσεις ή ερωτήσεις στην ομάδα του CyberShield.'};
 function selectLevel(level){
  document.querySelectorAll('[data-level-tab]').forEach(button=>{const active=button.dataset.levelTab===level;button.setAttribute('aria-selected',String(active));button.tabIndex=active?0:-1});
  document.querySelectorAll('.level-content').forEach(section=>{section.hidden=!section.dataset.levels.split(' ').includes(level)});
@@ -181,6 +202,17 @@ function selectLevel(level){
 document.querySelectorAll('[data-level-tab]').forEach(button=>button.addEventListener('click',()=>selectLevel(button.dataset.levelTab)));
 document.getElementById('levelTabs').addEventListener('keydown',event=>{if(!['ArrowLeft','ArrowRight','Home','End'].includes(event.key))return;event.preventDefault();const tabs=[...document.querySelectorAll('[data-level-tab]')];const current=tabs.findIndex(tab=>tab.getAttribute('aria-selected')==='true');let next=event.key==='Home'?0:event.key==='End'?tabs.length-1:(current+(event.key==='ArrowRight'?1:-1)+tabs.length)%tabs.length;tabs[next].focus();selectLevel(tabs[next].dataset.levelTab)});
 selectLevel('beginners');
+$('feedbackForm').addEventListener('submit',event=>{
+ event.preventDefault();
+ const nickname=$('feedbackName').value.trim();
+ const message=$('feedbackMessage').value.trim();
+ if(!message){$('feedbackStatus').textContent='Γράψε πρώτα το μήνυμά σου.';return;}
+ const subject='Μήνυμα για το CyberShield';
+ const body=(nickname?'Όνομα/ψευδώνυμο: '+nickname+'\n\n':'')+'Μήνυμα:\n'+message;
+ const mailto='mailto:t.a.f.m.w.2026@gmail.com?subject='+encodeURIComponent(subject)+'&body='+encodeURIComponent(body);
+ $('feedbackStatus').textContent='Ανοίγει η εφαρμογή email. Για να σταλεί το μήνυμα, πάτησε «Αποστολή» μέσα στην εφαρμογή.';
+ window.location.href=mailto;
+});
 let cameraStream=null,micStream=null,audioContext=null,analyser=null,micFrame=null,scanTimer=null,chart=null;
 const $=id=>document.getElementById(id);
 function stopStream(stream){if(stream)stream.getTracks().forEach(track=>track.stop())}
