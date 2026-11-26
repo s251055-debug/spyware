@@ -1,94 +1,103 @@
 <!doctype html>
 <html lang="el">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="Εκπαιδευτική προσομοίωση εντοπισμού spyware και απειλών κυβερνοασφάλειας.">
-  <title>CyberShield — Εκπαιδευτικό εργαστήριο</title>
-  <style>
-    :root{color-scheme:dark;--bg:#08111f;--panel:#101e31;--line:#24364d;--text:#e8f0fb;--muted:#9aabc1;--cyan:#5eead4;--blue:#60a5fa;--yellow:#fbbf24}
-    *{box-sizing:border-box}body{margin:0;background:radial-gradient(circle at 15% 0%,#15314a 0,transparent 35%),var(--bg);color:var(--text);font:16px/1.6 system-ui,-apple-system,Segoe UI,sans-serif}
-    main{width:min(920px,92%);margin:42px auto}.tag{color:var(--cyan);font-size:.78rem;letter-spacing:.14em;text-transform:uppercase;font-weight:800}
-    h1{font-size:clamp(2rem,6vw,3.4rem);line-height:1.08;margin:.5rem 0}p{color:var(--muted)}
-    .panel{background:linear-gradient(145deg,#13243a,#0d1929);border:1px solid var(--line);border-radius:18px;padding:24px;margin:22px 0;box-shadow:0 18px 50px #0003}
-    .notice{border-left:4px solid var(--cyan);padding:12px 16px;background:#0b2830;border-radius:8px;color:#c8fff4}
-    .row{display:flex;gap:12px;flex-wrap:wrap;align-items:center}.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;margin:18px 0}
-    .stat{background:#0b1727;border:1px solid var(--line);padding:16px;border-radius:12px}.stat strong{display:block;font-size:1.5rem;color:var(--cyan)}
-    button{border:0;border-radius:10px;padding:12px 18px;font-weight:750;font-size:1rem;cursor:pointer;background:var(--cyan);color:#06201e}
-    button.secondary{background:#243a55;color:var(--text)}button:disabled{opacity:.6;cursor:wait}
-    .track{height:12px;background:#07101c;border-radius:20px;overflow:hidden;border:1px solid var(--line)}.bar{height:100%;width:0;background:linear-gradient(90deg,var(--blue),var(--cyan));transition:width .35s}
-    ul{padding-left:22px;color:var(--muted)}li{margin:8px 0}.result{min-height:28px;color:var(--cyan);font-weight:650}
-    footer{font-size:.85rem;color:var(--muted);padding:12px 0 30px}
-  </style>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="description" content="Ασφαλές εκπαιδευτικό εργαστήριο κυβερνοασφάλειας CyberShield.">
+<title>CyberShield — Cybersecurity Lab</title>
+<style>
+:root{color-scheme:dark;--bg:#08111f;--panel:#101e31;--line:#29415d;--text:#e8f0fb;--muted:#a9b8cb;--cyan:#5eead4;--blue:#60a5fa;--yellow:#fbbf24}
+*{box-sizing:border-box}body{margin:0;background:radial-gradient(circle at 15% 0%,#15314a 0,transparent 35%),var(--bg);color:var(--text);font:16px/1.6 system-ui,-apple-system,Segoe UI,sans-serif}
+main{width:min(980px,92%);margin:36px auto}.tag{color:var(--cyan);font-size:.76rem;letter-spacing:.14em;text-transform:uppercase;font-weight:800}
+h1{font-size:clamp(2rem,6vw,3.5rem);line-height:1.08;margin:.5rem 0}h2{margin:.25rem 0 .6rem}p{color:var(--muted)}
+.panel{background:linear-gradient(145deg,#13243a,#0d1929);border:1px solid var(--line);border-radius:18px;padding:22px;margin:20px 0;box-shadow:0 18px 50px #0003}
+.notice{border-left:4px solid var(--cyan);padding:12px 16px;background:#0b2830;border-radius:8px;color:#c8fff4}
+.row{display:flex;gap:12px;flex-wrap:wrap;align-items:center}.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,260px),1fr));gap:14px}
+button{border:0;border-radius:10px;padding:11px 16px;font-weight:750;font-size:1rem;cursor:pointer;background:var(--cyan);color:#06201e}button.secondary{background:#29415d;color:var(--text)}button:disabled{opacity:.55;cursor:not-allowed}
+button:focus-visible,input:focus-visible{outline:3px solid var(--yellow);outline-offset:3px}
+.stat{background:#0b1727;border:1px solid var(--line);padding:14px;border-radius:12px}.stat strong{display:block;font-size:1.4rem;color:var(--cyan)}
+video{width:100%;max-height:300px;background:#03070c;border-radius:12px;margin-top:12px;object-fit:contain}
+.meter{height:14px;background:#07101c;border:1px solid var(--line);border-radius:20px;overflow:hidden}.meter>div{height:100%;width:0;background:linear-gradient(90deg,var(--blue),var(--cyan))}
+input[type=file]{max-width:100%;padding:12px;background:#0b1727;border:1px solid var(--line);border-radius:10px;color:var(--text)}
+.result{color:var(--cyan);font-weight:650;min-height:26px}small,.muted{color:var(--muted)}canvas{max-height:280px}
+footer{padding:10px 0 30px;color:var(--muted);font-size:.88rem}
+</style>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.7/dist/chart.umd.min.js" defer></script>
 </head>
-<body>
-<main>
-  <div class="tag">CyberShield · Cybersecurity Lab</div>
-  <h1>Μάθε να αναγνωρίζεις το spyware.</h1>
-  <p>Ένα μικρό διαδραστικό εργαστήριο για απειλές, προειδοποιητικά σημάδια και ασφαλείς συνήθειες στο διαδίκτυο.</p>
-  <div class="notice"><strong>Ασφαλής προσομοίωση:</strong> Αυτός ο ιστότοπος δεν σαρώνει πραγματικά τη συσκευή σου, δεν διαβάζει αρχεία, δεν χρησιμοποιεί κάμερα ή μικρόφωνο και δεν στέλνει προσωπικά δεδομένα.</div>
+<body><main>
+<div class="tag">CyberShield · Cybersecurity Lab</div>
+<h1>Μάθε να αναγνωρίζεις ψηφιακές απειλές.</h1>
+<p>Ένα διαδραστικό εργαστήριο για spyware, ιδιωτικότητα και ασφαλή χρήση συσκευών.</p>
+<div class="notice"><strong>Η ιδιωτικότητά σου:</strong> Κάμερα και μικρόφωνο ενεργοποιούνται μόνο όταν πατήσεις το αντίστοιχο κουμπί και εγκρίνεις την άδεια του browser. Δεν γίνεται εγγραφή, αποθήκευση ή αποστολή ήχου/εικόνας. Τα αρχεία εξετάζονται μόνο ως προς τα βασικά χαρακτηριστικά τους μέσα στη σελίδα. Τα παραδείγματα προσωπικών δεδομένων είναι ψεύτικα.</div>
 
-  <section class="panel" aria-labelledby="scan-title">
-    <div class="tag">Demo 01</div>
-    <h2 id="scan-title">Προσομοιωμένος έλεγχος ασφαλείας</h2>
-    <p>Πάτησε το κουμπί για να δεις πώς θα μπορούσε να εμφανίζεται μια εκπαιδευτική αναφορά ελέγχου.</p>
-    <div class="stats">
-      <div class="stat"><strong id="checked">0</strong><span>Εικονικοί έλεγχοι</span></div>
-      <div class="stat"><strong id="alerts">0</strong><span>Παραδείγματα ειδοποιήσεων</span></div>
-      <div class="stat"><strong id="status">Έτοιμο</strong><span>Κατάσταση demo</span></div>
-    </div>
-    <div class="track" role="progressbar" aria-label="Πρόοδος προσομοίωσης" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"><div class="bar" id="bar"></div></div>
-    <div class="row" style="margin-top:16px">
-      <button id="run">Έναρξη προσομοίωσης</button>
-      <button class="secondary" id="reset">Επαναφορά</button>
-    </div>
-    <p class="result" id="result" aria-live="polite">Δεν έχει ξεκινήσει έλεγχος.</p>
-  </section>
+<section class="panel"><div class="tag">01 · Camera</div><h2>Δοκιμή κάμερας</h2>
+<p>Η προεπισκόπηση εμφανίζεται μόνο σε εσένα. Πάτησε διακοπή όταν τελειώσεις.</p>
+<div class="row"><button id="cameraOn">Ενεργοποίηση κάμερας</button><button class="secondary" id="cameraOff" disabled>Διακοπή κάμερας</button></div>
+<video id="preview" autoplay playsinline muted hidden></video><p class="result" id="cameraStatus" aria-live="polite">Η κάμερα είναι απενεργοποιημένη.</p>
+</section>
 
-  <section class="panel">
-    <div class="tag">Learn 02</div><h2>Τι είναι το spyware;</h2>
-    <p>Το spyware είναι κακόβουλο λογισμικό που μπορεί να παρακολουθεί δραστηριότητες ή να συλλέγει πληροφορίες χωρίς έγκυρη άδεια. Η εγκατάστασή του και η μη εξουσιοδοτημένη συλλογή δεδομένων παραβιάζουν την ιδιωτικότητα.</p>
-    <h3>Πιθανά προειδοποιητικά σημάδια</h3>
-    <ul>
-      <li>Εφαρμογές που ζητούν δικαιώματα άσχετα με τη λειτουργία τους.</li>
-      <li>Άγνωστες εφαρμογές ή επεκτάσεις που δεν θυμάσαι να εγκατέστησες.</li>
-      <li>Απρόσμενες ειδοποιήσεις ασφαλείας ή αλλαγές στις ρυθμίσεις.</li>
-    </ul>
-  </section>
+<section class="panel"><div class="tag">02 · Microphone</div><h2>Δοκιμή μικροφώνου</h2>
+<p>Δείχνει μόνο μια ζωντανή ένδειξη έντασης. Δεν ηχογραφεί ούτε αποθηκεύει τη φωνή σου.</p>
+<div class="row"><button id="micOn">Ενεργοποίηση μικροφώνου</button><button class="secondary" id="micOff" disabled>Διακοπή μικροφώνου</button></div>
+<div class="meter" style="margin-top:14px" role="meter" aria-label="Ένταση μικροφώνου" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"><div id="micLevel"></div></div><p class="result" id="micStatus" aria-live="polite">Το μικρόφωνο είναι απενεργοποιημένο.</p>
+</section>
 
-  <section class="panel">
-    <div class="tag">Protect 03</div><h2>Πώς προστατεύεσαι</h2>
-    <ul>
-      <li>Εγκαθιστάς εφαρμογές μόνο από αξιόπιστες επίσημες πηγές.</li>
-      <li>Ελέγχεις τα δικαιώματα εφαρμογών και αφαιρείς όσα δεν χρειάζονται.</li>
-      <li>Κρατάς το λειτουργικό σύστημα και τις εφαρμογές ενημερωμένα.</li>
-      <li>Δεν ανοίγεις ύποπτους συνδέσμους ή συνημμένα.</li>
-      <li>Χρησιμοποιείς μοναδικούς κωδικούς και επαλήθευση δύο παραγόντων.</li>
-    </ul>
-  </section>
-  <footer>Εκπαιδευτικό project · Όλα τα αποτελέσματα είναι προκαθορισμένα παραδείγματα και όχι πραγματική διάγνωση συσκευής.</footer>
+<section class="panel"><div class="tag">03 · Local file check</div><h2>Έλεγχος δοκιμαστικού αρχείου</h2>
+<p>Επίλεξε ένα αρχείο. Η σελίδα θα εμφανίσει μόνο όνομα, τύπο και μέγεθος. Δεν διαβάζει το περιεχόμενο και δεν το ανεβάζει πουθενά.</p>
+<input id="filePick" type="file" aria-label="Επιλογή αρχείου για τοπικό έλεγχο">
+<div class="grid" style="margin-top:14px"><div class="stat"><strong id="fileName">—</strong><span>Όνομα αρχείου</span></div><div class="stat"><strong id="fileType">—</strong><span>Τύπος</span></div><div class="stat"><strong id="fileSize">—</strong><span>Μέγεθος</span></div></div>
+<p class="result" id="fileStatus" aria-live="polite">Δεν έχει επιλεγεί αρχείο.</p>
+</section>
+
+<section class="panel"><div class="tag">04 · Privacy sandbox</div><h2>Παράδειγμα ψεύτικων δεδομένων</h2>
+<p>Δες πώς μπορεί να εμφανίζεται μια αναφορά δεδομένων χωρίς να χρησιμοποιούνται αληθινά στοιχεία.</p>
+<div class="row"><button id="fakeData">Δημιουργία δοκιμαστικού προφίλ</button><button class="secondary" id="clearFake">Καθαρισμός</button></div>
+<div id="fakeOutput" class="stat" style="margin-top:14px" aria-live="polite">Δεν έχουν δημιουργηθεί παραδείγματα.</div>
+</section>
+
+<section class="panel"><div class="tag">05 · Simulated scan</div><h2>Εκπαιδευτική προσομοίωση ασφαλείας</h2>
+<p>Αυτή η αναφορά είναι προκαθορισμένο demo και δεν αποτελεί πραγματική σάρωση της συσκευής.</p>
+<div class="grid"><div class="stat"><strong id="checked">0</strong>Εικονικοί έλεγχοι</div><div class="stat"><strong id="alerts">0</strong>Υποθετικές ειδοποιήσεις</div><div class="stat"><strong id="scanStatus">Έτοιμο</strong>Κατάσταση</div></div>
+<div class="row" style="margin-top:14px"><button id="runScan">Έναρξη προσομοίωσης</button><button class="secondary" id="resetScan">Επαναφορά</button></div>
+<p class="result" id="scanResult" aria-live="polite">Δεν έχει ξεκινήσει έλεγχος.</p>
+<canvas id="scanChart" aria-label="Γράφημα αποτελεσμάτων εκπαιδευτικής προσομοίωσης"></canvas>
+</section>
+
+<section class="panel"><div class="tag">06 · Learn & protect</div><h2>Τι είναι το spyware;</h2>
+<p>Το spyware είναι λογισμικό που μπορεί να παρακολουθεί δραστηριότητες ή να συλλέγει πληροφορίες χωρίς έγκυρη άδεια.</p>
+<h3>Προειδοποιητικά σημάδια</h3><ul><li>Εφαρμογές που ζητούν άσχετα δικαιώματα.</li><li>Άγνωστες εφαρμογές ή επεκτάσεις.</li><li>Απρόσμενες ειδοποιήσεις ασφαλείας ή αλλαγές ρυθμίσεων.</li></ul>
+<h3>Πώς προστατεύεσαι</h3><ul><li>Εγκαθιστάς εφαρμογές από αξιόπιστες πηγές.</li><li>Ελέγχεις τα δικαιώματα εφαρμογών.</li><li>Κρατάς το λογισμικό ενημερωμένο.</li><li>Αποφεύγεις ύποπτους συνδέσμους και συνημμένα.</li><li>Χρησιμοποιείς μοναδικούς κωδικούς και επαλήθευση δύο παραγόντων.</li></ul>
+</section>
+<footer>Εκπαιδευτικό project. Δεν αποστέλλονται δεδομένα σε διακομιστή από τις παραπάνω λειτουργίες. Η κάμερα και το μικρόφωνο σταματούν όταν πατήσεις διακοπή ή κλείσεις τη σελίδα.</footer>
 </main>
 <script>
-  const run=document.getElementById('run'),reset=document.getElementById('reset');
-  const bar=document.getElementById('bar'),checked=document.getElementById('checked');
-  const alerts=document.getElementById('alerts'),status=document.getElementById('status');
-  const result=document.getElementById('result'),progress=bar.parentElement;
-  let timer=null;
-  const steps=[
-    {n:1,message:'Έλεγχος παραδειγμάτων δικαιωμάτων εφαρμογών…'},
-    {n:2,message:'Έλεγχος παραδειγμάτων άγνωστων επεκτάσεων…'},
-    {n:3,message:'Έλεγχος παραδειγμάτων ενημερώσεων…'},
-    {n:4,message:'Σύνταξη εκπαιδευτικής αναφοράς…'}
-  ];
-  function clear(){if(timer)clearInterval(timer);timer=null;run.disabled=false;bar.style.width='0%';progress.setAttribute('aria-valuenow','0');checked.textContent='0';alerts.textContent='0';status.textContent='Έτοιμο';result.textContent='Δεν έχει ξεκινήσει έλεγχος.'}
-  run.addEventListener('click',()=>{
-    clear();run.disabled=true;status.textContent='Σε εξέλιξη';let i=0;
-    timer=setInterval(()=>{
-      const step=steps[i];checked.textContent=String(step.n);bar.style.width=((i+1)/steps.length*100)+'%';progress.setAttribute('aria-valuenow',String((i+1)/steps.length*100));result.textContent=step.message;i++;
-      if(i===steps.length){clearInterval(timer);timer=null;run.disabled=false;status.textContent='Ολοκληρώθηκε';alerts.textContent='2';result.textContent='Demo ολοκληρώθηκε: εμφανίστηκαν 2 υποθετικά παραδείγματα προς διερεύνηση. Δεν έγινε πραγματικός έλεγχος ή συλλογή δεδομένων.'}
-    },650);
-  });
-  reset.addEventListener('click',clear);
-</script>
-</body>
-</html>
+let cameraStream=null,micStream=null,audioContext=null,analyser=null,micFrame=null,scanTimer=null,chart=null;
+const $=id=>document.getElementById(id);
+function stopStream(stream){if(stream)stream.getTracks().forEach(track=>track.stop())}
+$('cameraOn').addEventListener('click',async()=>{
+ try{if(!navigator.mediaDevices?.getUserMedia)throw new Error('Η πρόσβαση απαιτεί HTTPS και συμβατό browser.');
+ cameraStream=await navigator.mediaDevices.getUserMedia({video:true,audio:false});
+ $('preview').srcObject=cameraStream;$('preview').hidden=false;$('cameraOn').disabled=true;$('cameraOff').disabled=false;$('cameraStatus').textContent='Η κάμερα λειτουργεί τοπικά. Δεν γίνεται εγγραφή ή αποστολή.'}
+ catch(e){$('cameraStatus').textContent='Δεν ενεργοποιήθηκε: '+(e.message||e.name)}
+});
+$('cameraOff').addEventListener('click',()=>{stopStream(cameraStream);cameraStream=null;$('preview').srcObject=null;$('preview').hidden=true;$('cameraOn').disabled=false;$('cameraOff').disabled=true;$('cameraStatus').textContent='Η κάμερα απενεργοποιήθηκε.'});
+$('micOn').addEventListener('click',async()=>{
+ try{if(!navigator.mediaDevices?.getUserMedia)throw new Error('Η πρόσβαση απαιτεί HTTPS και συμβατό browser.');
+ micStream=await navigator.mediaDevices.getUserMedia({audio:true,video:false});
+ const AudioCtx=window.AudioContext||window.webkitAudioContext;if(!AudioCtx)throw new Error('Δεν υποστηρίζεται ανάλυση ήχου σε αυτόν τον browser.');
+ audioContext=new AudioCtx();const source=audioContext.createMediaStreamSource(micStream);analyser=audioContext.createAnalyser();analyser.fftSize=256;source.connect(analyser);
+ const data=new Uint8Array(analyser.frequencyBinCount);$('micOn').disabled=true;$('micOff').disabled=false;$('micStatus').textContent='Το μικρόφωνο λειτουργεί. Δεν γίνεται ηχογράφηση.';
+ const meter=$('micLevel').parentElement;
+ const draw=()=>{if(!analyser)return;analyser.getByteTimeDomainData(data);let sum=0;for(const v of data){const n=(v-128)/128;sum+=n*n}const level=Math.min(100,Math.round(Math.sqrt(sum/data.length)*250));$('micLevel').style.width=level+'%';meter.setAttribute('aria-valuenow',String(level));micFrame=requestAnimationFrame(draw)};draw();
+ }catch(e){stopStream(micStream);micStream=null;$('micStatus').textContent='Δεν ενεργοποιήθηκε: '+(e.message||e.name)}
+});
+$('micOff').addEventListener('click',async()=>{if(micFrame)cancelAnimationFrame(micFrame);micFrame=null;stopStream(micStream);micStream=null;analyser=null;if(audioContext){await audioContext.close();audioContext=null}$('micLevel').style.width='0%';$('micLevel').parentElement.setAttribute('aria-valuenow','0');$('micOn').disabled=false;$('micOff').disabled=true;$('micStatus').textContent='Το μικρόφωνο απενεργοποιήθηκε.'});
+$('filePick').addEventListener('change',e=>{const f=e.target.files?.[0];if(!f)return;$('fileName').textContent=f.name;$('fileType').textContent=f.type||'Άγνωστος τύπος';$('fileSize').textContent=f.size<1024?f.size+' bytes':(f.size/1024).toFixed(1)+' KB';$('fileStatus').textContent='Εμφανίστηκαν μόνο μεταδεδομένα. Το περιεχόμενο δεν διαβάστηκε ούτε μεταφορτώθηκε.'});
+$('fakeData').addEventListener('click',()=>{$('fakeOutput').innerHTML='<strong>Δοκιμαστικός χρήστης:</strong> Alex Example<br><strong>Email:</strong> alex@example.invalid<br><strong>Κωδικός:</strong> •••••••• (εικονικός)<br><strong>Κατάσταση:</strong> Ψεύτικα στοιχεία επίδειξης'});
+$('clearFake').addEventListener('click',()=>{$('fakeOutput').textContent='Δεν έχουν δημιουργηθεί παραδείγματα.'});
+const chartCanvas=$('scanChart');function initChart(){if(!window.Chart)return;chart=new Chart(chartCanvas,{type:'bar',data:{labels:['Δικαιώματα','Επεκτάσεις','Ενημερώσεις','Αναφορά'],datasets:[{label:'Εκπαιδευτικά βήματα',data:[0,0,0,0],backgroundColor:'#5eead4'}]},options:{responsive:true,plugins:{legend:{labels:{color:'#e8f0fb'}}},scales:{x:{ticks:{color:'#a9b8cb'},grid:{color:'#29415d'}},y:{beginAtZero:true,max:1,ticks:{stepSize:1,color:'#a9b8cb'},grid:{color:'#29415d'}}}}})}
+window.addEventListener('load',initChart);
+const scanSteps=['Έλεγχος παραδειγμάτων δικαιωμάτων…','Έλεγχος παραδειγμάτων επεκτάσεων…','Έλεγχος παραδειγμάτων ενημερώσεων…','Σύνταξη εκπαιδευτικής αναφοράς…'];
+$('runScan').addEventListener('click',()=>{if(scanTimer)clearInterval(scanTimer);let i=0;$('checked').textContent='0';$('alerts').textContent='0';$('scanStatus').textContent='Σε εξέλιξη';$('runScan').disabled=true;$('scanResult').textContent=scanSteps[0];if(chart){chart.data.datasets[0].data=[0,0,0,0];chart.update()}scanTimer=setInterval(()=>{i++;$('checked').textContent=String(i);$('scanResult').textContent=scanSteps[i-1];if(chart){chart.data.datasets[0].data=scanSteps.map((_,n)=>n<i?1:0);chart.update()}if(i===4){clearInterval(scanTimer);scanTimer=null;$('runScan').disabled=false;$('alerts').textContent='2';$('scanStatus').textContent='Ολοκληρώθηκε';$('scanResult').textContent='Demo ολοκληρώθηκε: 2 υποθετικά παραδείγματα. Δεν έγινε πραγματική σάρωση.'}},650)});
+$('resetScan').addEventListener('click',()=>{if(scanTimer)clearInterval(scanTimer);scanTimer=null;$('runScan').disabled=false;$('checked').textContent='0';$('alerts').textContent='0';$('scanStatus').textContent='Έτοιμο';$('scanResult').textContent='Δεν έχει ξεκινήσει έλεγχος.';if(chart){chart.data.datasets[0].data=[0,0,0,0];chart.update()}});
+window.addEventListener('pagehide',()=>{stopStream(cameraStream);stopStream(micStream);if(audioContext)audioContext.close()});
+</script></body></html>
