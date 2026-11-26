@@ -2,7 +2,7 @@
 <html lang="el">
 <head>
 <meta name="google-site-verification" content="j0iutZ6ZqqycvP7VTlpDoRIeiV2EaWOtGHYqlwC-AtI" />
-<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#08111f"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"><meta name="apple-mobile-web-app-title" content="CyberShield"><link rel="manifest" href="/manifest.webmanifest"><link rel="icon" href="/icons/icon.svg" type="image/svg+xml"><link rel="apple-touch-icon" href="/icons/icon.svg">
 <meta name="description" content="Μάθε για την κυβερνοασφάλεια, το spyware, το malware, το phishing, τις ψηφιακές απειλές και την προστασία προσωπικών δεδομένων με το δωρεάν εκπαιδευτικό εργαστήριο CyberShield.">
 <meta name="robots" content="index,follow">
 <link rel="canonical" href="https://spyware-silk.vercel.app/">
@@ -39,7 +39,7 @@ footer{padding:10px 0 30px;color:var(--muted);font-size:.88rem}
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.7/dist/chart.umd.min.js" defer></script>
 </head>
 <body><main>
-<div class="tag">CyberShield · Cybersecurity Lab</div>
+<div class="row" style="justify-content:space-between;margin-bottom:14px"><div class="tag">CyberShield · Cybersecurity Lab</div><button id="installApp" type="button" class="secondary">Install CyberShield</button></div><p id="installHelp" class="muted" aria-live="polite" hidden></p>
 <h1>Μάθε να αναγνωρίζεις ψηφιακές απειλές.</h1>
 <p>Ένα διαδραστικό εργαστήριο για spyware, ιδιωτικότητα και ασφαλή χρήση συσκευών.</p>
 <div class="notice"><strong>Η ιδιωτικότητά σου:</strong> Κάμερα και μικρόφωνο ενεργοποιούνται μόνο όταν πατήσεις το αντίστοιχο κουμπί και εγκρίνεις την άδεια του browser. Δεν γίνεται εγγραφή, αποθήκευση ή αποστολή ήχου/εικόνας. Τα αρχεία εξετάζονται μόνο ως προς τα βασικά χαρακτηριστικά τους μέσα στη σελίδα. Τα παραδείγματα προσωπικών δεδομένων είναι ψεύτικα.</div>
@@ -254,4 +254,34 @@ window.addEventListener('pagehide',()=>{stopStream(cameraStream);stopStream(micS
 
 $('gradeQuiz').addEventListener('click',()=>{const answers={q1:'b',q2:'a',q3:'b',q4:'b'};let score=0,answered=0;for(const [q,a] of Object.entries(answers)){const chosen=document.querySelector('input[name="'+q+'"]:checked');if(chosen){answered++;if(chosen.value===a)score++}}$('quizResult').textContent=answered<4?'Απάντησες σε '+answered+' από τις 4 ερωτήσεις. Συμπλήρωσε όλες τις απαντήσεις.':'Αποτέλεσμα: '+score+'/4 σωστές απαντήσεις.'});
 $('resetQuiz').addEventListener('click',()=>{document.querySelectorAll('input[name^="q"]').forEach(el=>el.checked=false);$('quizResult').textContent=''});
+</script>
+<script id="cybershield-pwa-registration">
+let deferredInstallPrompt = null;
+const installButton = document.getElementById("installApp");
+const installHelp = document.getElementById("installHelp");
+window.addEventListener("beforeinstallprompt", event => {
+  event.preventDefault();
+  deferredInstallPrompt = event;
+  installButton.hidden = false;
+});
+installButton.addEventListener("click", async () => {
+  if (deferredInstallPrompt) {
+    deferredInstallPrompt.prompt();
+    await deferredInstallPrompt.userChoice;
+    deferredInstallPrompt = null;
+    installButton.hidden = true;
+    return;
+  }
+  installHelp.hidden = false;
+  installHelp.textContent = /iPad|iPhone|iPod/.test(navigator.userAgent)
+    ? "To add CyberShield to your Home Screen: open the browser Share menu, choose “Add to Home Screen”, then confirm."
+    : "If your browser offers installation, use the Install option in its menu. You can also keep using CyberShield in this browser.";
+});
+if ("serviceWorker" in navigator && location.protocol === "https:") {
+  window.addEventListener("load", () => {
+    navigator.serviceWorker.register("/sw.js").catch(error => {
+      console.warn("CyberShield offline support could not be enabled:", error);
+    });
+  });
+}
 </script></body></html>
