@@ -62,7 +62,24 @@ footer{padding:10px 0 30px;color:var(--muted);font-size:.88rem}
 <canvas id="scanChart" aria-label="Γράφημα αποτελεσμάτων εκπαιδευτικής προσομοίωσης"></canvas>
 </section>
 
-<section class="panel"><div class="tag">06 · Learn & protect</div><h2>Τι είναι το spyware;</h2>
+<section class="panel"><div class="tag">06 · Malware library</div><h2>Βασικές κατηγορίες malware</h2><p>Το malware είναι γενικός όρος για λογισμικό που έχει σχεδιαστεί να προκαλεί βλάβη ή να εκτελεί μη εξουσιοδοτημένες ενέργειες. Οι κατηγορίες μπορεί να αλληλεπικαλύπτονται.</p><div class="grid">
+<div class="stat"><strong>Virus · Ιός</strong><p>Προσκολλάται σε αρχεία ή προγράμματα και μπορεί να εξαπλωθεί όταν αυτά εκτελεστούν.</p><small>Πρόσεχε άγνωστα συνημμένα και αρχεία.</small></div>
+<div class="stat"><strong>Worm · Σκουλήκι</strong><p>Μπορεί να αντιγράφεται και να εξαπλώνεται μεταξύ συστημάτων χωρίς να χρειάζεται άλλο πρόγραμμα.</p><small>Κράτα ενημερωμένες τις συσκευές.</small></div>
+<div class="stat"><strong>Trojan horse · Δούρειος ίππος</strong><p>Παρουσιάζεται ως νόμιμη εφαρμογή, ενώ κρύβει ανεπιθύμητη λειτουργία.</p><small>Κατέβαζε εφαρμογές από επίσημες πηγές.</small></div>
+<div class="stat"><strong>Ransomware · Λυτρισμικό</strong><p>Μπορεί να κλειδώσει ή να κρυπτογραφήσει αρχεία και να απαιτήσει πληρωμή.</p><small>Κράτα αντίγραφα ασφαλείας.</small></div>
+<div class="stat"><strong>Adware</strong><p>Εμφανίζει ανεπιθύμητες διαφημίσεις· ορισμένες μορφές παρακολουθούν και δραστηριότητα.</p><small>Έλεγχε εφαρμογές και επεκτάσεις.</small></div>
+<div class="stat"><strong>Rootkit</strong><p>Προσπαθεί να κρύψει κακόβουλη δραστηριότητα ή μη εξουσιοδοτημένη πρόσβαση.</p><small>Χρησιμοποίησε ενημερωμένα εργαλεία ασφαλείας.</small></div>
+<div class="stat"><strong>Botnet</strong><p>Δίκτυο συσκευών που έχουν μολυνθεί και ελέγχονται χωρίς την άδεια των ιδιοκτητών τους.</p><small>Ασφάλισε τις συσκευές σου.</small></div>
+<div class="stat"><strong>Keylogger</strong><p>Καταγράφει πληκτρολογήσεις χωρίς έγκυρη άδεια.</p><small>Μην εγκαθιστάς άγνωστο λογισμικό.</small></div>
+<div class="stat"><strong>Cryptojacking</strong><p>Χρησιμοποιεί κρυφά τους πόρους μιας συσκευής για εξόρυξη κρυπτονομισμάτων.</p><small>Πρόσεχε ασυνήθιστη επιβράδυνση.</small></div>
+<div class="stat"><strong>Wiper</strong><p>Σχεδιάζεται για να διαγράψει ή να καταστρέψει δεδομένα.</p><small>Διατήρησε ασφαλή αντίγραφα.</small></div>
+</div><p class="notice"><strong>Σημείωση:</strong> Το phishing είναι τεχνική εξαπάτησης και όχι από μόνο του τύπος malware.</p></section>
+<section class="panel"><div class="tag">07 · Knowledge check</div><h2>Quiz αναγνώρισης malware</h2><p>Επίλεξε μία απάντηση σε κάθε ερώτηση.</p>
+<div class="stat"><strong>1. Ποιο malware μπορεί να κλειδώσει αρχεία και να ζητήσει πληρωμή;</strong><label><input type="radio" name="q1" value="a"> Adware</label><br><label><input type="radio" name="q1" value="b"> Ransomware</label><br><label><input type="radio" name="q1" value="c"> Worm</label></div>
+<div class="stat"><strong>2. Ποιο προσποιείται ότι είναι νόμιμη εφαρμογή;</strong><label><input type="radio" name="q2" value="a"> Trojan</label><br><label><input type="radio" name="q2" value="b"> Wiper</label><br><label><input type="radio" name="q2" value="c"> Botnet</label></div>
+<div class="stat"><strong>3. Τι είναι ένα botnet;</strong><label><input type="radio" name="q3" value="a"> Πρόγραμμα αντιγράφων ασφαλείας</label><br><label><input type="radio" name="q3" value="b"> Δίκτυο συσκευών που ελέγχονται χωρίς άδεια</label><br><label><input type="radio" name="q3" value="c"> Ενημέρωση λογισμικού</label></div>
+<div class="stat"><strong>4. Το phishing είναι:</strong><label><input type="radio" name="q4" value="a"> Πάντα ιός</label><br><label><input type="radio" name="q4" value="b"> Τεχνική εξαπάτησης</label><br><label><input type="radio" name="q4" value="c"> Αντίγραφο ασφαλείας</label></div>
+<div class="row"><button id="gradeQuiz">Έλεγχος απαντήσεων</button><button class="secondary" id="resetQuiz">Καθαρισμός quiz</button></div><p id="quizResult" class="result" aria-live="polite"></p></section><section class="panel"><div class="tag">08 · Learn & protect</div><h2>Τι είναι το spyware;</h2>
 <p>Το spyware είναι λογισμικό που μπορεί να παρακολουθεί δραστηριότητες ή να συλλέγει πληροφορίες χωρίς έγκυρη άδεια.</p>
 <h3>Προειδοποιητικά σημάδια</h3><ul><li>Εφαρμογές που ζητούν άσχετα δικαιώματα.</li><li>Άγνωστες εφαρμογές ή επεκτάσεις.</li><li>Απρόσμενες ειδοποιήσεις ασφαλείας ή αλλαγές ρυθμίσεων.</li></ul>
 <h3>Πώς προστατεύεσαι</h3><ul><li>Εγκαθιστάς εφαρμογές από αξιόπιστες πηγές.</li><li>Ελέγχεις τα δικαιώματα εφαρμογών.</li><li>Κρατάς το λογισμικό ενημερωμένο.</li><li>Αποφεύγεις ύποπτους συνδέσμους και συνημμένα.</li><li>Χρησιμοποιείς μοναδικούς κωδικούς και επαλήθευση δύο παραγόντων.</li></ul>
@@ -100,4 +117,7 @@ const scanSteps=['Έλεγχος παραδειγμάτων δικαιωμάτω
 $('runScan').addEventListener('click',()=>{if(scanTimer)clearInterval(scanTimer);let i=0;$('checked').textContent='0';$('alerts').textContent='0';$('scanStatus').textContent='Σε εξέλιξη';$('runScan').disabled=true;$('scanResult').textContent=scanSteps[0];if(chart){chart.data.datasets[0].data=[0,0,0,0];chart.update()}scanTimer=setInterval(()=>{i++;$('checked').textContent=String(i);$('scanResult').textContent=scanSteps[i-1];if(chart){chart.data.datasets[0].data=scanSteps.map((_,n)=>n<i?1:0);chart.update()}if(i===4){clearInterval(scanTimer);scanTimer=null;$('runScan').disabled=false;$('alerts').textContent='2';$('scanStatus').textContent='Ολοκληρώθηκε';$('scanResult').textContent='Demo ολοκληρώθηκε: 2 υποθετικά παραδείγματα. Δεν έγινε πραγματική σάρωση.'}},650)});
 $('resetScan').addEventListener('click',()=>{if(scanTimer)clearInterval(scanTimer);scanTimer=null;$('runScan').disabled=false;$('checked').textContent='0';$('alerts').textContent='0';$('scanStatus').textContent='Έτοιμο';$('scanResult').textContent='Δεν έχει ξεκινήσει έλεγχος.';if(chart){chart.data.datasets[0].data=[0,0,0,0];chart.update()}});
 window.addEventListener('pagehide',()=>{stopStream(cameraStream);stopStream(micStream);if(audioContext)audioContext.close()});
+
+$('gradeQuiz').addEventListener('click',()=>{const answers={q1:'b',q2:'a',q3:'b',q4:'b'};let score=0,answered=0;for(const [q,a] of Object.entries(answers)){const chosen=document.querySelector('input[name="'+q+'"]:checked');if(chosen){answered++;if(chosen.value===a)score++}}$('quizResult').textContent=answered<4?'Απάντησες σε '+answered+' από τις 4 ερωτήσεις. Συμπλήρωσε όλες τις απαντήσεις.':'Αποτέλεσμα: '+score+'/4 σωστές απαντήσεις.'});
+$('resetQuiz').addEventListener('click',()=>{document.querySelectorAll('input[name^="q"]').forEach(el=>el.checked=false);$('quizResult').textContent=''});
 </script></body></html>
