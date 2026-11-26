@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="el">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Εκπαιδευτική προσομοίωση εντοπισμού spyware και απειλών κυβερνοασφάλειας.">
+  <title>CyberShield — Εκπαιδευτικό εργαστήριο</title>
+  <style>
+    :root{color-scheme:dark;--bg:#08111f;--panel:#101e31;--line:#24364d;--text:#e8f0fb;--muted:#9aabc1;--cyan:#5eead4;--blue:#60a5fa;--yellow:#fbbf24}
+    *{box-sizing:border-box}body{margin:0;background:radial-gradient(circle at 15% 0%,#15314a 0,transparent 35%),var(--bg);color:var(--text);font:16px/1.6 system-ui,-apple-system,Segoe UI,sans-serif}
+    main{width:min(920px,92%);margin:42px auto}.tag{color:var(--cyan);font-size:.78rem;letter-spacing:.14em;text-transform:uppercase;font-weight:800}
+    h1{font-size:clamp(2rem,6vw,3.4rem);line-height:1.08;margin:.5rem 0}p{color:var(--muted)}
+    .panel{background:linear-gradient(145deg,#13243a,#0d1929);border:1px solid var(--line);border-radius:18px;padding:24px;margin:22px 0;box-shadow:0 18px 50px #0003}
+    .notice{border-left:4px solid var(--cyan);padding:12px 16px;background:#0b2830;border-radius:8px;color:#c8fff4}
+    .row{display:flex;gap:12px;flex-wrap:wrap;align-items:center}.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;margin:18px 0}
+    .stat{background:#0b1727;border:1px solid var(--line);padding:16px;border-radius:12px}.stat strong{display:block;font-size:1.5rem;color:var(--cyan)}
+    button{border:0;border-radius:10px;padding:12px 18px;font-weight:750;font-size:1rem;cursor:pointer;background:var(--cyan);color:#06201e}
+    button.secondary{background:#243a55;color:var(--text)}button:disabled{opacity:.6;cursor:wait}
+    .track{height:12px;background:#07101c;border-radius:20px;overflow:hidden;border:1px solid var(--line)}.bar{height:100%;width:0;background:linear-gradient(90deg,var(--blue),var(--cyan));transition:width .35s}
+    ul{padding-left:22px;color:var(--muted)}li{margin:8px 0}.result{min-height:28px;color:var(--cyan);font-weight:650}
+    footer{font-size:.85rem;color:var(--muted);padding:12px 0 30px}
+  </style>
+</head>
+<body>
+<main>
+  <div class="tag">CyberShield · Cybersecurity Lab</div>
+  <h1>Μάθε να αναγνωρίζεις το spyware.</h1>
+  <p>Ένα μικρό διαδραστικό εργαστήριο για απειλές, προειδοποιητικά σημάδια και ασφαλείς συνήθειες στο διαδίκτυο.</p>
+  <div class="notice"><strong>Ασφαλής προσομοίωση:</strong> Αυτός ο ιστότοπος δεν σαρώνει πραγματικά τη συσκευή σου, δεν διαβάζει αρχεία, δεν χρησιμοποιεί κάμερα ή μικρόφωνο και δεν στέλνει προσωπικά δεδομένα.</div>
+
+  <section class="panel" aria-labelledby="scan-title">
+    <div class="tag">Demo 01</div>
+    <h2 id="scan-title">Προσομοιωμένος έλεγχος ασφαλείας</h2>
+    <p>Πάτησε το κουμπί για να δεις πώς θα μπορούσε να εμφανίζεται μια εκπαιδευτική αναφορά ελέγχου.</p>
+    <div class="stats">
+      <div class="stat"><strong id="checked">0</strong><span>Εικονικοί έλεγχοι</span></div>
+      <div class="stat"><strong id="alerts">0</strong><span>Παραδείγματα ειδοποιήσεων</span></div>
+      <div class="stat"><strong id="status">Έτοιμο</strong><span>Κατάσταση demo</span></div>
+    </div>
+    <div class="track" role="progressbar" aria-label="Πρόοδος προσομοίωσης" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"><div class="bar" id="bar"></div></div>
+    <div class="row" style="margin-top:16px">
+      <button id="run">Έναρξη προσομοίωσης</button>
+      <button class="secondary" id="reset">Επαναφορά</button>
+    </div>
+    <p class="result" id="result" aria-live="polite">Δεν έχει ξεκινήσει έλεγχος.</p>
+  </section>
+
+  <section class="panel">
+    <div class="tag">Learn 02</div><h2>Τι είναι το spyware;</h2>
+    <p>Το spyware είναι κακόβουλο λογισμικό που μπορεί να παρακολουθεί δραστηριότητες ή να συλλέγει πληροφορίες χωρίς έγκυρη άδεια. Η εγκατάστασή του και η μη εξουσιοδοτημένη συλλογή δεδομένων παραβιάζουν την ιδιωτικότητα.</p>
+    <h3>Πιθανά προειδοποιητικά σημάδια</h3>
+    <ul>
+      <li>Εφαρμογές που ζητούν δικαιώματα άσχετα με τη λειτουργία τους.</li>
+      <li>Άγνωστες εφαρμογές ή επεκτάσεις που δεν θυμάσαι να εγκατέστησες.</li>
+      <li>Απρόσμενες ειδοποιήσεις ασφαλείας ή αλλαγές στις ρυθμίσεις.</li>
+    </ul>
+  </section>
+
+  <section class="panel">
+    <div class="tag">Protect 03</div><h2>Πώς προστατεύεσαι</h2>
+    <ul>
+      <li>Εγκαθιστάς εφαρμογές μόνο από αξιόπιστες επίσημες πηγές.</li>
+      <li>Ελέγχεις τα δικαιώματα εφαρμογών και αφαιρείς όσα δεν χρειάζονται.</li>
+      <li>Κρατάς το λειτουργικό σύστημα και τις εφαρμογές ενημερωμένα.</li>
+      <li>Δεν ανοίγεις ύποπτους συνδέσμους ή συνημμένα.</li>
+      <li>Χρησιμοποιείς μοναδικούς κωδικούς και επαλήθευση δύο παραγόντων.</li>
+    </ul>
+  </section>
+  <footer>Εκπαιδευτικό project · Όλα τα αποτελέσματα είναι προκαθορισμένα παραδείγματα και όχι πραγματική διάγνωση συσκευής.</footer>
+</main>
+<script>
+  const run=document.getElementById('run'),reset=document.getElementById('reset');
+  const bar=document.getElementById('bar'),checked=document.getElementById('checked');
+  const alerts=document.getElementById('alerts'),status=document.getElementById('status');
+  const result=document.getElementById('result'),progress=bar.parentElement;
+  let timer=null;
+  const steps=[
+    {n:1,message:'Έλεγχος παραδειγμάτων δικαιωμάτων εφαρμογών…'},
+    {n:2,message:'Έλεγχος παραδειγμάτων άγνωστων επεκτάσεων…'},
+    {n:3,message:'Έλεγχος παραδειγμάτων ενημερώσεων…'},
+    {n:4,message:'Σύνταξη εκπαιδευτικής αναφοράς…'}
+  ];
+  function clear(){if(timer)clearInterval(timer);timer=null;run.disabled=false;bar.style.width='0%';progress.setAttribute('aria-valuenow','0');checked.textContent='0';alerts.textContent='0';status.textContent='Έτοιμο';result.textContent='Δεν έχει ξεκινήσει έλεγχος.'}
+  run.addEventListener('click',()=>{
+    clear();run.disabled=true;status.textContent='Σε εξέλιξη';let i=0;
+    timer=setInterval(()=>{
+      const step=steps[i];checked.textContent=String(step.n);bar.style.width=((i+1)/steps.length*100)+'%';progress.setAttribute('aria-valuenow',String((i+1)/steps.length*100));result.textContent=step.message;i++;
+      if(i===steps.length){clearInterval(timer);timer=null;run.disabled=false;status.textContent='Ολοκληρώθηκε';alerts.textContent='2';result.textContent='Demo ολοκληρώθηκε: εμφανίστηκαν 2 υποθετικά παραδείγματα προς διερεύνηση. Δεν έγινε πραγματικός έλεγχος ή συλλογή δεδομένων.'}
+    },650);
+  });
+  reset.addEventListener('click',clear);
+</script>
+</body>
+</html>
