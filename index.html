@@ -20,6 +20,13 @@ video{width:100%;max-height:300px;background:#03070c;border-radius:12px;margin-t
 input[type=file]{max-width:100%;padding:12px;background:#0b1727;border:1px solid var(--line);border-radius:10px;color:var(--text)}
 .result{color:var(--cyan);font-weight:650;min-height:26px}small,.muted{color:var(--muted)}canvas{max-height:280px}
 footer{padding:10px 0 30px;color:var(--muted);font-size:.88rem}
+
+.level-tabs{display:flex;gap:10px;flex-wrap:wrap;margin:22px 0}
+.level-tabs button{flex:1;min-width:120px;padding:13px 16px}
+.level-tabs button[aria-selected="true"]{background:var(--blue);color:#061426;box-shadow:0 0 0 2px var(--cyan)}
+.level-intro{margin:0 0 14px;color:var(--muted)}
+.level-panel[hidden]{display:none!important}
+@media(max-width:520px){.level-tabs{display:grid;grid-template-columns:1fr}.level-tabs button{width:100%}}
 </style>
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.7/dist/chart.umd.min.js" defer></script>
 </head>
@@ -28,33 +35,63 @@ footer{padding:10px 0 30px;color:var(--muted);font-size:.88rem}
 <h1>Μάθε να αναγνωρίζεις ψηφιακές απειλές.</h1>
 <p>Ένα διαδραστικό εργαστήριο για spyware, ιδιωτικότητα και ασφαλή χρήση συσκευών.</p>
 <div class="notice"><strong>Η ιδιωτικότητά σου:</strong> Κάμερα και μικρόφωνο ενεργοποιούνται μόνο όταν πατήσεις το αντίστοιχο κουμπί και εγκρίνεις την άδεια του browser. Δεν γίνεται εγγραφή, αποθήκευση ή αποστολή ήχου/εικόνας. Τα αρχεία εξετάζονται μόνο ως προς τα βασικά χαρακτηριστικά τους μέσα στη σελίδα. Τα παραδείγματα προσωπικών δεδομένων είναι ψεύτικα.</div>
-
-<section class="panel"><div class="tag">01 · Camera</div><h2>Δοκιμή κάμερας</h2>
+<nav class="level-tabs" id="levelTabs" role="tablist" aria-label="Επίλεξε εκπαιδευτικό επίπεδο">
+<button type="button" role="tab" id="tab-beginners" aria-controls="level-beginners" aria-selected="true" data-level-tab="beginners">Beginners</button>
+<button type="button" role="tab" id="tab-igcse" aria-controls="level-igcse" aria-selected="false" data-level-tab="igcse">IGCSE</button>
+<button type="button" role="tab" id="tab-alevel" aria-controls="level-alevel" aria-selected="false" data-level-tab="alevel">A-Level</button>
+</nav>
+<p class="level-intro" id="levelDescription" aria-live="polite">Ξεκίνα με τις βασικές έννοιες και τις διαδραστικές δοκιμές.</p>
+<section class="panel level-panel" id="level-igcse" role="tabpanel" aria-labelledby="tab-igcse" hidden>
+<div class="tag">IGCSE · Cambridge 0478 / 0984</div><h2>Cyber Security — IGCSE level</h2>
+<p>Για το Cambridge IGCSE Computer Science 0478/0984 (syllabus 2026–2028), η ενότητα 5.3 καλύπτει απειλές κυβερνοασφάλειας και τρόπους προστασίας δεδομένων.</p>
+<h3>Απειλές που πρέπει να γνωρίζεις</h3>
+<div class="grid">
+<div class="stat"><strong>Brute-force attack</strong><p>Επαναλαμβανόμενη δοκιμή πιθανών κωδικών μέχρι να βρεθεί ο σωστός.</p></div>
+<div class="stat"><strong>Data interception</strong><p>Μη εξουσιοδοτημένη υποκλοπή δεδομένων κατά τη μεταφορά τους.</p></div>
+<div class="stat"><strong>DDoS</strong><p>Πολλές συσκευές στέλνουν μεγάλο όγκο αιτημάτων σε μια υπηρεσία, δυσκολεύοντας την πρόσβαση των κανονικών χρηστών.</p></div>
+<div class="stat"><strong>Hacking</strong><p>Μη εξουσιοδοτημένη πρόσβαση σε σύστημα ή δεδομένα.</p></div>
+<div class="stat"><strong>Pharming</strong><p>Ανακατεύθυνση χρήστη σε πλαστή ιστοσελίδα, ακόμη κι αν πιστεύει ότι επισκέπτεται τη σωστή διεύθυνση.</p></div>
+<div class="stat"><strong>Phishing</strong><p>Παραπλανητικό μήνυμα ή ιστοσελίδα που προσπαθεί να αποσπάσει πληροφορίες.</p></div>
+<div class="stat"><strong>Social engineering</strong><p>Χειραγώγηση ανθρώπων ώστε να αποκαλύψουν πληροφορίες ή να κάνουν μη ασφαλείς ενέργειες.</p></div>
+</div>
+<h3>Μέτρα προστασίας</h3>
+<ul><li><b>Access levels:</b> κάθε χρήστης έχει μόνο τα δικαιώματα που χρειάζεται.</li><li><b>Anti-malware:</b> εντοπίζει και βοηθά στην αφαίρεση κακόβουλου λογισμικού.</li><li><b>Authentication:</b> κωδικοί, βιομετρικά στοιχεία και επαλήθευση δύο βημάτων.</li><li><b>Updates:</b> διορθώνουν γνωστά κενά ασφαλείας.</li><li><b>Firewalls:</b> φιλτράρουν δικτυακή κίνηση βάσει κανόνων.</li><li><b>Privacy settings:</b> περιορίζουν ποια δεδομένα και πληροφορίες είναι ορατά.</li><li><b>SSL/TLS:</b> προστατεύει τα δεδομένα κατά τη μεταφορά τους μέσω ασφαλούς σύνδεσης.</li></ul>
+<h3>IGCSE practice</h3>
+<ol><li>Δώσε δύο διαφορές μεταξύ phishing και pharming.</li><li>Εξήγησε πώς ένα firewall μπορεί να μειώσει τον κίνδυνο μη εξουσιοδοτημένης πρόσβασης.</li><li>Περιέγραψε δύο τρόπους με τους οποίους ένας χρήστης μπορεί να αναγνωρίσει ένα ύποπτο μήνυμα.</li></ol>
+<p class="notice">Οι ερωτήσεις είναι πρωτότυπες για εξάσκηση και όχι αντιγραφή από εξεταστικό υλικό.</p>
+</section>
+<section class="panel level-panel" id="level-beginners" role="tabpanel" aria-labelledby="tab-beginners">
+<div class="tag">Beginners · Start here</div><h2>Καλώς ήρθες στο CyberShield!</h2><p>Μάθε με απλά λόγια τι είναι το malware, πώς προστατεύεις τα δεδομένα σου και δοκίμασε τις διαδραστικές δραστηριότητες.</p>
+</section>
+<section class="panel level-panel" id="level-alevel" role="tabpanel" aria-labelledby="tab-alevel" hidden>
+<div class="tag">A-Level · Advanced study</div><h2>Προχωρημένη μελέτη</h2><p>Ανάλυση μηχανισμών, τεχνικών επιπτώσεων, αξιολόγηση αμυντικών μέτρων και ξεχωριστές διαδρομές για 9618 και 9626.</p>
+</section>
+<section class="panel level-content" data-levels="beginners"><div class="tag">01 · Camera</div><h2>Δοκιμή κάμερας</h2>
 <p>Η προεπισκόπηση εμφανίζεται μόνο σε εσένα. Πάτησε διακοπή όταν τελειώσεις.</p>
 <div class="row"><button id="cameraOn">Ενεργοποίηση κάμερας</button><button class="secondary" id="cameraOff" disabled>Διακοπή κάμερας</button></div>
 <video id="preview" autoplay playsinline muted hidden></video><p class="result" id="cameraStatus" aria-live="polite">Η κάμερα είναι απενεργοποιημένη.</p>
 </section>
 
-<section class="panel"><div class="tag">02 · Microphone</div><h2>Δοκιμή μικροφώνου</h2>
+<section class="panel level-content" data-levels="beginners"><div class="tag">02 · Microphone</div><h2>Δοκιμή μικροφώνου</h2>
 <p>Δείχνει μόνο μια ζωντανή ένδειξη έντασης. Δεν ηχογραφεί ούτε αποθηκεύει τη φωνή σου.</p>
 <div class="row"><button id="micOn">Ενεργοποίηση μικροφώνου</button><button class="secondary" id="micOff" disabled>Διακοπή μικροφώνου</button></div>
 <div class="meter" style="margin-top:14px" role="meter" aria-label="Ένταση μικροφώνου" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"><div id="micLevel"></div></div><p class="result" id="micStatus" aria-live="polite">Το μικρόφωνο είναι απενεργοποιημένο.</p>
 </section>
 
-<section class="panel"><div class="tag">03 · Local file check</div><h2>Έλεγχος δοκιμαστικού αρχείου</h2>
+<section class="panel level-content" data-levels="beginners"><div class="tag">03 · Local file check</div><h2>Έλεγχος δοκιμαστικού αρχείου</h2>
 <p>Επίλεξε ένα αρχείο. Η σελίδα θα εμφανίσει μόνο όνομα, τύπο και μέγεθος. Δεν διαβάζει το περιεχόμενο και δεν το ανεβάζει πουθενά.</p>
 <input id="filePick" type="file" aria-label="Επιλογή αρχείου για τοπικό έλεγχο">
 <div class="grid" style="margin-top:14px"><div class="stat"><strong id="fileName">—</strong><span>Όνομα αρχείου</span></div><div class="stat"><strong id="fileType">—</strong><span>Τύπος</span></div><div class="stat"><strong id="fileSize">—</strong><span>Μέγεθος</span></div></div>
 <p class="result" id="fileStatus" aria-live="polite">Δεν έχει επιλεγεί αρχείο.</p>
 </section>
 
-<section class="panel"><div class="tag">04 · Privacy sandbox</div><h2>Παράδειγμα ψεύτικων δεδομένων</h2>
+<section class="panel level-content" data-levels="beginners"><div class="tag">04 · Privacy sandbox</div><h2>Παράδειγμα ψεύτικων δεδομένων</h2>
 <p>Δες πώς μπορεί να εμφανίζεται μια αναφορά δεδομένων χωρίς να χρησιμοποιούνται αληθινά στοιχεία.</p>
 <div class="row"><button id="fakeData">Δημιουργία δοκιμαστικού προφίλ</button><button class="secondary" id="clearFake">Καθαρισμός</button></div>
 <div id="fakeOutput" class="stat" style="margin-top:14px" aria-live="polite">Δεν έχουν δημιουργηθεί παραδείγματα.</div>
 </section>
 
-<section class="panel"><div class="tag">05 · Simulated scan</div><h2>Εκπαιδευτική προσομοίωση ασφαλείας</h2>
+<section class="panel level-content" data-levels="beginners"><div class="tag">05 · Simulated scan</div><h2>Εκπαιδευτική προσομοίωση ασφαλείας</h2>
 <p>Αυτή η αναφορά είναι προκαθορισμένο demo και δεν αποτελεί πραγματική σάρωση της συσκευής.</p>
 <div class="grid"><div class="stat"><strong id="checked">0</strong>Εικονικοί έλεγχοι</div><div class="stat"><strong id="alerts">0</strong>Υποθετικές ειδοποιήσεις</div><div class="stat"><strong id="scanStatus">Έτοιμο</strong>Κατάσταση</div></div>
 <div class="row" style="margin-top:14px"><button id="runScan">Έναρξη προσομοίωσης</button><button class="secondary" id="resetScan">Επαναφορά</button></div>
@@ -62,7 +99,7 @@ footer{padding:10px 0 30px;color:var(--muted);font-size:.88rem}
 <canvas id="scanChart" aria-label="Γράφημα αποτελεσμάτων εκπαιδευτικής προσομοίωσης"></canvas>
 </section>
 
-<section class="panel"><div class="tag">06 · Malware library</div><h2>Βασικές κατηγορίες malware</h2><p>Το malware είναι γενικός όρος για λογισμικό που έχει σχεδιαστεί να προκαλεί βλάβη ή να εκτελεί μη εξουσιοδοτημένες ενέργειες. Οι κατηγορίες μπορεί να αλληλεπικαλύπτονται.</p><div class="grid">
+<section class="panel level-content" data-levels="beginners igcse"><div class="tag">06 · Malware library</div><h2>Βασικές κατηγορίες malware</h2><p>Το malware είναι γενικός όρος για λογισμικό που έχει σχεδιαστεί να προκαλεί βλάβη ή να εκτελεί μη εξουσιοδοτημένες ενέργειες. Οι κατηγορίες μπορεί να αλληλεπικαλύπτονται.</p><div class="grid">
 <div class="stat"><strong>Virus · Ιός</strong><p>Προσκολλάται σε αρχεία ή προγράμματα και μπορεί να εξαπλωθεί όταν αυτά εκτελεστούν.</p><small>Πρόσεχε άγνωστα συνημμένα και αρχεία.</small></div>
 <div class="stat"><strong>Worm · Σκουλήκι</strong><p>Μπορεί να αντιγράφεται και να εξαπλώνεται μεταξύ συστημάτων χωρίς να χρειάζεται άλλο πρόγραμμα.</p><small>Κράτα ενημερωμένες τις συσκευές.</small></div>
 <div class="stat"><strong>Trojan horse · Δούρειος ίππος</strong><p>Παρουσιάζεται ως νόμιμη εφαρμογή, ενώ κρύβει ανεπιθύμητη λειτουργία.</p><small>Κατέβαζε εφαρμογές από επίσημες πηγές.</small></div>
@@ -74,12 +111,12 @@ footer{padding:10px 0 30px;color:var(--muted);font-size:.88rem}
 <div class="stat"><strong>Cryptojacking</strong><p>Χρησιμοποιεί κρυφά τους πόρους μιας συσκευής για εξόρυξη κρυπτονομισμάτων.</p><small>Πρόσεχε ασυνήθιστη επιβράδυνση.</small></div>
 <div class="stat"><strong>Wiper</strong><p>Σχεδιάζεται για να διαγράψει ή να καταστρέψει δεδομένα.</p><small>Διατήρησε ασφαλή αντίγραφα.</small></div>
 </div><p class="notice"><strong>Σημείωση:</strong> Το phishing είναι τεχνική εξαπάτησης και όχι από μόνο του τύπος malware.</p></section>
-<section class="panel"><div class="tag">07 · Knowledge check</div><h2>Quiz αναγνώρισης malware</h2><p>Επίλεξε μία απάντηση σε κάθε ερώτηση.</p>
+<section class="panel level-content" data-levels="beginners igcse"><div class="tag">07 · Knowledge check</div><h2>Quiz αναγνώρισης malware</h2><p>Επίλεξε μία απάντηση σε κάθε ερώτηση.</p>
 <div class="stat"><strong>1. Ποιο malware μπορεί να κλειδώσει αρχεία και να ζητήσει πληρωμή;</strong><label><input type="radio" name="q1" value="a"> Adware</label><br><label><input type="radio" name="q1" value="b"> Ransomware</label><br><label><input type="radio" name="q1" value="c"> Worm</label></div>
 <div class="stat"><strong>2. Ποιο προσποιείται ότι είναι νόμιμη εφαρμογή;</strong><label><input type="radio" name="q2" value="a"> Trojan</label><br><label><input type="radio" name="q2" value="b"> Wiper</label><br><label><input type="radio" name="q2" value="c"> Botnet</label></div>
 <div class="stat"><strong>3. Τι είναι ένα botnet;</strong><label><input type="radio" name="q3" value="a"> Πρόγραμμα αντιγράφων ασφαλείας</label><br><label><input type="radio" name="q3" value="b"> Δίκτυο συσκευών που ελέγχονται χωρίς άδεια</label><br><label><input type="radio" name="q3" value="c"> Ενημέρωση λογισμικού</label></div>
 <div class="stat"><strong>4. Το phishing είναι:</strong><label><input type="radio" name="q4" value="a"> Πάντα ιός</label><br><label><input type="radio" name="q4" value="b"> Τεχνική εξαπάτησης</label><br><label><input type="radio" name="q4" value="c"> Αντίγραφο ασφαλείας</label></div>
-<div class="row"><button id="gradeQuiz">Έλεγχος απαντήσεων</button><button class="secondary" id="resetQuiz">Καθαρισμός quiz</button></div><p id="quizResult" class="result" aria-live="polite"></p></section><section class="panel"><div class="tag">08 · A-Level extension</div><h2>Malware σε βάθος: αρχιτεκτονική, επιπτώσεις και άμυνα</h2>
+<div class="row"><button id="gradeQuiz">Έλεγχος απαντήσεων</button><button class="secondary" id="resetQuiz">Καθαρισμός quiz</button></div><p id="quizResult" class="result" aria-live="polite"></p></section><section class="panel level-content" data-levels="alevel"><div class="tag">08 · A-Level extension</div><h2>Malware σε βάθος: αρχιτεκτονική, επιπτώσεις και άμυνα</h2>
 <p>Επίπεδο A-Level: στόχος είναι να εξηγείς όχι μόνο τον ορισμό, αλλά και τον μηχανισμό σε εννοιολογικό επίπεδο, την επίπτωση σε δεδομένα και συστήματα, και την αποτελεσματικότητα των αντίμετρων.</p>
 <h3>1. Σύγκριση μηχανισμών</h3>
 <div style="overflow-x:auto"><table style="width:100%;border-collapse:collapse"><thead><tr><th style="text-align:left;padding:8px;border-bottom:1px solid #29415d">Κατηγορία</th><th style="text-align:left;padding:8px;border-bottom:1px solid #29415d">Βασικός μηχανισμός</th><th style="text-align:left;padding:8px;border-bottom:1px solid #29415d">Κύρια επίπτωση</th></tr></thead><tbody>
@@ -106,13 +143,13 @@ footer{padding:10px 0 30px;color:var(--muted);font-size:.88rem}
 <h3>5. Μελέτη περίπτωσης</h3><p><strong>Σενάριο:</strong> Ένας οργανισμός παρατηρεί ότι πολλοί υπολογιστές δεν ανοίγουν τα αρχεία τους. Το τμήμα IT εντοπίζει ασυνήθιστη δραστηριότητα σε κοινόχρηστους φακέλους και διακοπή πρόσβασης σε υπηρεσίες.</p><p><strong>Ερωτήματα ανάλυσης:</strong> Ποια στοιχεία υποδεικνύουν ransomware; Ποιες επιπτώσεις υπάρχουν σε confidentiality, integrity και availability; Ποια αποδεικτικά στοιχεία πρέπει να διατηρηθούν; Πώς θα αξιολογούσες την αποτελεσματικότητα των backups, του patching και του least privilege;</p>
 <p class="notice"><strong>Ακαδημαϊκή προσέγγιση:</strong> Εξήγησε κάθε απάντηση με αλυσίδα «μηχανισμός → τεχνική επίπτωση → επιχειρησιακή συνέπεια → κατάλληλος έλεγχος». Δεν περιλαμβάνονται οδηγίες δημιουργίας ή εκτέλεσης malware.</p>
 </section>
-<section class="panel"><div class="tag">09 · Learn & protect</div><h2>Τι είναι το spyware;</h2>
+<section class="panel level-content" data-levels="beginners igcse"><div class="tag">09 · Learn & protect</div><h2>Τι είναι το spyware;</h2>
 <p>Το spyware είναι λογισμικό που μπορεί να παρακολουθεί δραστηριότητες ή να συλλέγει πληροφορίες χωρίς έγκυρη άδεια.</p>
 <h3>Προειδοποιητικά σημάδια</h3><ul><li>Εφαρμογές που ζητούν άσχετα δικαιώματα.</li><li>Άγνωστες εφαρμογές ή επεκτάσεις.</li><li>Απρόσμενες ειδοποιήσεις ασφαλείας ή αλλαγές ρυθμίσεων.</li></ul>
 <h3>Πώς προστατεύεσαι</h3><ul><li>Εγκαθιστάς εφαρμογές από αξιόπιστες πηγές.</li><li>Ελέγχεις τα δικαιώματα εφαρμογών.</li><li>Κρατάς το λογισμικό ενημερωμένο.</li><li>Αποφεύγεις ύποπτους συνδέσμους και συνημμένα.</li><li>Χρησιμοποιείς μοναδικούς κωδικούς και επαλήθευση δύο παραγόντων.</li></ul>
 </section>
 
-<section class="panel"><div class="tag">10 · Cambridge syllabus paths</div><h2>Δύο ξεχωριστές διαδρομές A-Level</h2>
+<section class="panel level-content" data-levels="alevel"><div class="tag">10 · Cambridge syllabus paths</div><h2>Δύο ξεχωριστές διαδρομές A-Level</h2>
 <p>Το CyberShield περιλαμβάνει κοινό υπόβαθρο ασφάλειας, αλλά η εξεταστέα ύλη δεν είναι ίδια. Διάλεξε τη σωστή διαδρομή σύμφωνα με το έτος εξέτασής σου.</p>
 <div class="grid">
 <div class="stat"><strong>9618 · Computer Science</strong><p><b>Για εξέταση 2027–2029:</b> η ενότητα Security εστιάζει στην κρυπτογράφηση, στα συμμετρικά και ασύμμετρα κλειδιά, στα SSL/TLS και στα ψηφιακά πιστοποιητικά/υπογραφές.</p><p><b>Να μπορείς να εξηγήσεις:</b> plaintext και ciphertext, δημόσιο και ιδιωτικό κλειδί, πώς επιτυγχάνεται εμπιστευτικότητα ή επαλήθευση μηνύματος, τον ρόλο του TLS στην επικοινωνία client–server.</p><small>Το αναλυτικό κεφάλαιο malware παρακάτω είναι χρήσιμο συμπληρωματικό υπόβαθρο, αλλά δεν πρέπει να θεωρείται η βασική ενότητα Security του 9618 για το 2027–2029.</small></div>
@@ -133,6 +170,17 @@ footer{padding:10px 0 30px;color:var(--muted);font-size:.88rem}
 <footer>Εκπαιδευτικό project. Δεν αποστέλλονται δεδομένα σε διακομιστή από τις παραπάνω λειτουργίες. Η κάμερα και το μικρόφωνο σταματούν όταν πατήσεις διακοπή ή κλείσεις τη σελίδα.</footer>
 </main>
 <script>
+
+const levelDescriptions={beginners:'Ξεκίνα με τις βασικές έννοιες και τις διαδραστικές δοκιμές.',igcse:'Μελέτησε τις απειλές κυβερνοασφάλειας, το malware και τα μέτρα προστασίας για IGCSE.',alevel:'Προχώρησε σε τεχνική ανάλυση, αξιολόγηση μέτρων και ύλη Cambridge A-Level 9618 / 9626.'};
+function selectLevel(level){
+ document.querySelectorAll('[data-level-tab]').forEach(button=>{const active=button.dataset.levelTab===level;button.setAttribute('aria-selected',String(active));button.tabIndex=active?0:-1});
+ document.querySelectorAll('.level-content').forEach(section=>{section.hidden=!section.dataset.levels.split(' ').includes(level)});
+ document.querySelectorAll('.level-panel').forEach(section=>{section.hidden=section.id!=='level-'+level});
+ document.getElementById('levelDescription').textContent=levelDescriptions[level];
+}
+document.querySelectorAll('[data-level-tab]').forEach(button=>button.addEventListener('click',()=>selectLevel(button.dataset.levelTab)));
+document.getElementById('levelTabs').addEventListener('keydown',event=>{if(!['ArrowLeft','ArrowRight','Home','End'].includes(event.key))return;event.preventDefault();const tabs=[...document.querySelectorAll('[data-level-tab]')];const current=tabs.findIndex(tab=>tab.getAttribute('aria-selected')==='true');let next=event.key==='Home'?0:event.key==='End'?tabs.length-1:(current+(event.key==='ArrowRight'?1:-1)+tabs.length)%tabs.length;tabs[next].focus();selectLevel(tabs[next].dataset.levelTab)});
+selectLevel('beginners');
 let cameraStream=null,micStream=null,audioContext=null,analyser=null,micFrame=null,scanTimer=null,chart=null;
 const $=id=>document.getElementById(id);
 function stopStream(stream){if(stream)stream.getTracks().forEach(track=>track.stop())}
